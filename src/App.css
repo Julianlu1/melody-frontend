@@ -1,7 +1,6 @@
 /* ----- GOOGLE FONT ----- */
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
-
 /* ----- STANDARD CSS ----- */
 *{
   margin:0;
@@ -20,6 +19,9 @@ body{
 
 .homepageBackground{
   background-color: rgb(224, 181, 181);
+  /* background-image: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)) ,url("https://lh3.googleusercontent.com/proxy/Dvs7Pwb5gyyXpG38eNQb3oyj_mZ7uxFcn89fE-5HnvNZREYrprCXEHtxa65BSG702B9MXwPNsdzZmcFsyuazaVN_LYhMKEuqUtJisUL3MouACaUF8rb8HxLpwIc9dZMUgzpEfOVpq9uDRY0SYWi0He6EtK0FXf6zpv-prLeQW41J91GITxVQ");
+  background-repeat: no-repeat;
+  background-size: cover; */
   height:85vh; /* Dit aanpassen zodat de hoogte van de achtergrond wordt aangepast */
 }
 
@@ -34,7 +36,7 @@ a{
 }
 
 section{
-  padding-top: 50px;
+  padding-top: 100px;
 }
 
 /* ----- BUTTONS ----- */
