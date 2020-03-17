@@ -1,0 +1,38 @@
+nav{
+    background-color: rgb(224, 181, 181);
+    height:15vh;
+}
+
+.row{
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+.logo{
+    height: 100px;
+    width: auto;
+    float: left;
+}
+
+.mainNav{
+    margin-top: 43px;
+    float: right;
+    list-style: none;
+}
+
+.mainNav li{
+    display: inline-block;
+    margin-left: 40px;
+}
+
+.mainNav li a{
+    color: #fff;
+    font-size: 18px;
+    /* font-weight: 100; */
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.2s;
+}
+
+.mainNav li a:hover{
+    border-bottom: 2px solid orange;
+}

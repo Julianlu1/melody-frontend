@@ -1,0 +1,18 @@
+.sectionTitle{
+    padding-bottom: 50px;
+    text-align: center;
+    word-spacing: 2px;
+}
+
+.media{
+    height: 140px;
+}
+
+.root{
+    max-width: 345px;
+}
+
+p{
+    width: 85%;
+    margin: 0px auto 25px auto;
+}
