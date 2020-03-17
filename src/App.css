@@ -1,15 +1,52 @@
+/* ----- GOOGLE FONT ----- */
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+
+/* ----- STANDARD CSS ----- */
 *{
   margin:0;
   padding:0;
   box-sizing: border-box;
 }
 
+html{
+  font-weight: 100;
+}
+
 body{
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', Helvetica, sans-serif;
   line-height: 1.4;
+}
+
+.homepageBackground{
+  background-color: rgb(224, 181, 181);
+  height:85vh; /* Dit aanpassen zodat de hoogte van de achtergrond wordt aangepast */
 }
 
 a{
   color:#333;
   text-decoration: none;
 }
+
+.container{
+  margin: auto;
+  width: 72%;
+}
+
+section{
+  padding-top: 50px;
+}
+
+/* ----- BUTTONS ----- */
+
+.btn{
+  padding: 10px 25px;
+  border-radius: 25px;
+}
+
+.btn-full{
+  background-color: orange;
+  color: #fff;
+  font-size: 18px;
+}
+

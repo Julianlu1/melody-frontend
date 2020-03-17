@@ -14,13 +14,14 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <h1>Melody</h1>
+
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/sheetmusic" component={SheetMusic} />
         <Route exact path="/sheetmusic/:id" component={SingleSheetMusic} />
         <Route component={Error} />
       </Switch>
+
     </div>
   );
 }
