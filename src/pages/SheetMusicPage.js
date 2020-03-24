@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import SheetMusic from '../components/SheetMusic';
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
 
 
 export default class SheetMusicPage extends Component {
@@ -30,10 +32,15 @@ export default class SheetMusicPage extends Component {
     render() {
         return (
             <div className="container">
-                <h1>Hello from the sheet music page</h1>
-                {this.state.sheetmusic.map((item) => (
-                    <SheetMusic key={item.id} sheet={item} />
-                ))}
+                <h2>Blader hier door bladmuziek.</h2>
+                <p>Filter opties</p>
+                <GridList cols={4} cellHeight={600}>
+                    {this.state.sheetmusic.map((item) => (
+                        <GridListTile key={item.id}>
+                            <SheetMusic key={item.id} sheet={item} />
+                        </GridListTile>
+                    ))}
+                </GridList>
             </div >
         )
     }

@@ -1,5 +1,5 @@
 /* ----- GOOGLE FONT ----- */
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400&display=swap');
 
 /* ----- STANDARD CSS ----- */
 *{
@@ -9,7 +9,7 @@
 }
 
 html{
-  font-weight: 100;
+  font-weight: 300;
 }
 
 body{
@@ -52,3 +52,33 @@ section{
   font-size: 18px;
 }
 
+/* ----- PARAGRAPH ----- */
+p{
+  line-height: 145%;
+  width: 70%;
+  margin: 0px auto 25px auto;
+}
+
+/* ----- H1 H2 H3 ----- */
+
+h1,
+h2{
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+h2{
+  text-align: center;
+}
+
+/* Oranje lijn onder h2 */
+h2:after{
+  display:block;
+  height: 2px;
+  background-color: orange;
+  content: " ";
+  width: 100px;
+  margin: 0 auto;
+  margin-top: 30px;
+}

@@ -16,7 +16,7 @@ export default class Componist extends Component {
     render() {
         return (
             <section>
-                <h1 className={styles.sectionTitle}>Bekende componisten.</h1>
+                <h2 className={styles.sectionTitle}>Bekende componisten.</h2>
                 <p>Een componist(e) of toondichter(es) is een persoon die muziek componeert.
                 Dit wil zeggen dat hij/zij deze bedenkt, creëert en meestal opschrijft.
                     Het ordenen van tonen tot een muziekstuk noemt men componeren.</p>
@@ -28,7 +28,7 @@ export default class Componist extends Component {
                                 <CardMedia className={styles.media} image="https://historiek.net/wp-content/uploads-phistor1/2016/12/Johann-Sebastian-Bach.jpeg" title="Bach" />
                             </CardActionArea>
                             <CardContent>
-                                <Typography gutterBottom variant="h5" component="h2">
+                                <Typography gutterBottom variant="h5" component="h3">
                                     Bach.
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary" component="p">
@@ -44,7 +44,7 @@ export default class Componist extends Component {
                                 <CardMedia className={styles.media} image="https://historiek.net/wp-content/uploads-phistor1/2017/11/Ludwig-von-Beethoven-portret-door.jpeg" title="Bach" />
                             </CardActionArea>
                             <CardContent>
-                                <Typography gutterBottom variant="h5" component="h2">
+                                <Typography gutterBottom variant="h5" component="h3">
                                     Beethoven.
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary" component="p">
@@ -62,7 +62,7 @@ export default class Componist extends Component {
                                 <CardMedia className={styles.media} image="https://historiek.net/wp-content/uploads-phistor1/2016/12/Johann-Sebastian-Bach.jpeg" title="Bach" />
                             </CardActionArea>
                             <CardContent>
-                                <Typography gutterBottom variant="h5" component="h2">
+                                <Typography gutterBottom variant="h5" component="h3">
                                     Mozart.
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary" component="p">
