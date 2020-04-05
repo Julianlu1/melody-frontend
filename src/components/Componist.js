@@ -22,7 +22,7 @@ export default class Componist extends Component {
                     Het ordenen van tonen tot een muziekstuk noemt men componeren.</p>
                 <br />
                 <Grid container spacing={3} >
-                    <Grid container justify="center" item xs={4}>
+                    <Grid container justify="center" item md={4}>
                         <Card className={styles.root}>
                             <CardActionArea>
                                 <CardMedia className={styles.media} image="https://historiek.net/wp-content/uploads-phistor1/2016/12/Johann-Sebastian-Bach.jpeg" title="Bach" />
@@ -38,7 +38,7 @@ export default class Componist extends Component {
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid container justify="center" item xs={4}>
+                    <Grid container justify="center" item md={4}>
                         <Card>
                             <CardActionArea>
                                 <CardMedia className={styles.media} image="https://historiek.net/wp-content/uploads-phistor1/2017/11/Ludwig-von-Beethoven-portret-door.jpeg" title="Bach" />
@@ -56,7 +56,7 @@ export default class Componist extends Component {
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid container justify="center" item xs={4}>
+                    <Grid container justify="center" item md={4}>
                         <Card>
                             <CardActionArea>
                                 <CardMedia className={styles.media} image="https://historiek.net/wp-content/uploads-phistor1/2016/12/Johann-Sebastian-Bach.jpeg" title="Bach" />

@@ -1,0 +1,14 @@
+.media{
+    height: 300px;
+}
+
+.root{
+    max-width: 250px;
+}
+.pos{
+    margin-bottom: 12px;
+}
+
+.title{
+    font-size: 14px;
+}
