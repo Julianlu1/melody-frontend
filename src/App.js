@@ -21,7 +21,6 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route exact path="/sheetmusic" component={SheetMusic} />
         <Route exact path="/sheetmusic/:id" component={SingleSheetMusic} />
-        <Route exact path="/login" component={Login} />
         <Route component={Error} />
       </Switch>
 

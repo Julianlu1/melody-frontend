@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styles from '../css/Navbar.module.css'
 import { Link } from 'react-router-dom';
 import Logo from '../img/logo.png';
+import Login from './Login';
 
 export default class Navbar extends Component {
     render() {
@@ -17,7 +18,7 @@ export default class Navbar extends Component {
                             <Link to="/sheetmusic">Sheet music</Link>
                         </li>
                         <li>
-                            <Link to="/login">Inloggen</Link>
+                            <Login />
                         </li>
                     </ul>
                 </div >
