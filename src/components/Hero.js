@@ -11,7 +11,7 @@ export default class Hero extends Component {
             <div className={styles.hero}>
                 <h1>Melody <br /> Grootste bladmuziekcollectie op het web</h1>
                 <a className="btn btn-full" style={{ marginRight: "15px" }} href="/sheetmusic">bladeren</a>
-                <a className="btn btn-full" href="/signup">Registreer</a>
+                <a className="btn btn-full" href="/register">Registreer</a>
             </div>
         )
     }

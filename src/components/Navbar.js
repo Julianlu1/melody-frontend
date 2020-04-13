@@ -18,7 +18,7 @@ export default class Navbar extends Component {
                             <Link to="/sheetmusic">Sheet music</Link>
                         </li>
                         <li>
-                            <Login />
+                            <Login  />
                         </li>
                     </ul>
                 </div >

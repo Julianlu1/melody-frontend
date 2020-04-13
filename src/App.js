@@ -4,8 +4,7 @@ import './App.css';
 import Home from './pages/HomePage';
 import SheetMusic from './pages/SheetMusicPage';
 import SingleSheetMusic from './pages/SingleSheetMusicPage';
-import Login from './components/Login';
-
+import Register from './components/Register';
 import Error from './pages/ErrorPage';
 
 import Navbar from './components/Navbar';
@@ -21,6 +20,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route exact path="/sheetmusic" component={SheetMusic} />
         <Route exact path="/sheetmusic/:id" component={SingleSheetMusic} />
+        <Route exact path="/register" component={Register} />
         <Route component={Error} />
       </Switch>
 

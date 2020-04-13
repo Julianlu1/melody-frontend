@@ -93,7 +93,7 @@ function Login(props) {
                         id="password"
                         name="password"
                         label="Wachtwoord"
-                        type="text"
+                        type="password"
                         fullWidth
                         onChange={handleInputChange}
                     />
