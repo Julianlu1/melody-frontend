@@ -27,6 +27,10 @@ function Login(props) {
         console.log(props.history);
     };
 
+    const handleCloseReturn = () => {
+        setOpen(false);
+    };
+
     function handleInputChange(event) {
         const target = event.target;
         const value = target.value;
@@ -100,7 +104,7 @@ function Login(props) {
                 </DialogContent>
                 <DialogActions>
                     Nog geen account?<a href="/register" style={{ color: 'orange' }}> Start hier</a>
-                    <Button onClick={handleClose} color="primary">
+                    <Button onClick={handleCloseReturn} color="primary">
                         Terug
                     </Button>
                     <Button onClick={handleClose} color="primary" variant="contained"  >
@@ -111,6 +115,5 @@ function Login(props) {
         </div>
     )
 }
-
 
 export default Login;
