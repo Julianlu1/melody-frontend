@@ -6,6 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Auth from "../Auth";
 
 import Link from '@material-ui/core/Link'; // Material UI link, anders dan de react-router-dom link
 
@@ -62,10 +63,8 @@ function Login(props) {
         }).then(response => response.json())
             .then(data => {
                 if (data.token != null) {
-                    // Store token in variable
-                    console.log('ingelogd');
-                    window.sessionStorage.setItem("token", data.token);
-                    window.location.href = '/';
+                    Auth.login(data.token);
+                    window.location.reload();
                 }
                 else if (data.message === "Unauthorized") {
                     alert("Gebruikersnaam of wachtwoord klopt niet");
