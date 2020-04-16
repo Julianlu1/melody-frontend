@@ -21,9 +21,13 @@ const useStyles = makeStyles(theme => ({
         marginTop: 5
     },
     textfield: {
-        paddingTop: 25,
-        width: 350,
-        height: 125
+        marginTop: 25,
+        marginLeft: '5%',
+        marginRight: '5%',
+        width: '90%'
+    },
+    rating: {
+        marginLeft: 500
     },
     button: {
         marginTop: 50,
@@ -33,7 +37,10 @@ const useStyles = makeStyles(theme => ({
 
 function SingleSheetMusicPage(props) {
     const [sheetmusic, setSheetmusic] = useState([]);
-    const [comment, setComment] = useState([]);
+    const [comment, setComment] = useState({
+        description: '',
+        score: 0
+    });
     const filePath = `file:///D:/FontysICT/Semester%204/Fun4/Melody/melody-backend/target/classes/pdf/${sheetmusic.pdf}`;
     const classes = useStyles();
 
@@ -51,35 +58,47 @@ function SingleSheetMusicPage(props) {
         window.open(filePath);
     }
 
+    // De waarde van de descriptionbox setten
     function handleChange(e) {
-        console.log(comment);
-        setComment(e.target.value);
+        setComment({
+            ...comment,
+            description: e.target.value
+        });
     }
+
+    // De score setten, je wil de score zetten van een comment
+    function handleChangeRating(value) {
+        setComment({
+            ...comment,
+            score: value
+        });
+    }
+
     function placeComment() {
+        console.log(comment);
+        debugger
         // Titel en description in variabele zetten
-        let description =
-            fetch('http://localhost:8090/comments', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    sheetId: props.match.params.id,
-                    userId: 1,
-                    title: "",
-                    description: "",
-                    score: 10
-                })
-            }).then(response => {
-                response.json();
-                console.log(response);
-                if (response.ok) {
-                    console.log("comment geplaatst");
-                } else {
-                    console.log("Niet gelukt");
-                }
+        fetch('http://localhost:8090/comments', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                sheetId: props.match.params.id,
+                title: "",
+                description: "",
+                score: 10
             })
+        }).then(response => {
+            response.json();
+            console.log(response);
+            if (response.ok) {
+                console.log("comment geplaatst");
+            } else {
+                console.log("Niet gelukt");
+            }
+        })
 
     }
 
@@ -109,13 +128,14 @@ function SingleSheetMusicPage(props) {
                         className={classes.textfield}
                         label="Reactie"
                         multiline
-                        rows="4"
+                        rows="7"
+                        columns="3"
                         placeholder="Schrijf een reactie"
-                        style={{ textAlign: 'center' }}
+                        variant="filled"
                         onChange={handleChange}
                     />
-                    <StarRating />
-                    <Button className={classes.button} variant="contained" color="primary" onClick={placeComment}>
+                    <StarRating className={classes.rating} onSelectChange={handleChangeRating} />
+                    <Button className={classes.button} variant="contained" color="primary" onClick={placeComment} >
                         Plaats reactie
                         </Button>
                     <Button className={classes.button} variant="contained" color="default" onClick={downloadSheet} >

@@ -12,20 +12,28 @@ const StyledRating = withStyles({
     },
     iconHover: {
         color: '#ff3d47',
-    },
+    }
 })(Rating);
 
-function StarRating() {
+function StarRating(props) {
+
+    function handleChange(e) {
+        // e.target.value returned 2 waardes ipv 1
+        props.onSelectChange(e.target.value);
+    }
+
     return (
         <div>
             <Box component="fieldset" mb={3} borderColor="transparent">
                 <Typography component="legend">Rating</Typography>
                 <StyledRating
                     name="customized-color"
+                    id="input"
                     defaultValue={2}
                     getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`}
                     precision={0.5}
                     icon={<FavoriteIcon fontSize="inherit" />}
+                    onChange={handleChange}
                 />
             </Box>
         </div>
