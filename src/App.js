@@ -26,7 +26,8 @@ function App() {
         <Route exact path="/sheetmusic" component={SheetMusic} />
         <Route exact path="/sheetmusic/:id" component={SingleSheetMusic} />
         <Route exact path="/register" component={Register} />
-        <ProtectedRoute exact path="/dashboard" component={DashboardPage} />
+        {/* Verander <Route naar <Protectedroute */}
+        <Route exact path="/dashboard" component={DashboardPage} />
         <Route component={Error} />
       </Switch>
 

@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
+import Upload from '../components/Upload';
 
 function DashBoardPage() {
+
     return (
-        <div>
+        <div className="container">
             <h1>DashboardPage</h1>
+            <Upload />
+
         </div>
-    )
+    );
 
 }
 
