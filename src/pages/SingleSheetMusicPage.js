@@ -55,7 +55,7 @@ function SingleSheetMusicPage(props) {
     }
 
     function downloadSheet() {
-        window.open(filePath);
+        window.open('http://localhost:8090' + "/images/" + sheetmusic.pdf);
     }
 
     // De waarde van de descriptionbox setten
@@ -82,11 +82,12 @@ function SingleSheetMusicPage(props) {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + window.sessionStorage.getItem("token")
             },
             body: JSON.stringify({
                 sheetId: props.match.params.id,
-                title: "",
+                title: comment,
                 description: "",
                 score: 10
             })

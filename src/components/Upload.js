@@ -26,6 +26,8 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: '15%'
     },
     button: {
+        marginLeft: '15%',
+        marginRight: '15%',
         textAlign: 'center'
     },
     input: {
@@ -38,8 +40,6 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '15px'
     }
 }));
-
-
 
 function Upload() {
     const classes = useStyles();
@@ -54,20 +54,19 @@ function Upload() {
         file: null
     });
 
+    let [fileName, setFileName] = useState('');
+
     function uploadSheet() {
+        const formData = new FormData;
+        formData.append("title", sheetmusic.title);
+        formData.append("componist", sheetmusic.componist);
+        formData.append("key", sheetmusic.key);
+        formData.append("instrument", sheetmusic.instrument);
+        formData.append("file", sheetmusic.file[0]);
+
         fetch('http://localhost:8090/sheetmusic', {
             method: 'POST',
-            headers: {
-                'Content-type': 'application/json',
-                'Authorization': 'Bearer ' + window.sessionStorage.getItem("token")
-            },
-            body: JSON.stringify({
-                title: sheetmusic.title,
-                componist: sheetmusic.componist,
-                key: sheetmusic.key,
-                instrument: sheetmusic.instrument,
-                file: sheetmusic.file
-            })
+            body: formData
         }).then(response => {
             if (response.status == 200) {
                 alert('succesvol toegevoegd!')
@@ -111,18 +110,20 @@ function Upload() {
                 return (
                     <div className={classes.button}>
                         <input
-                            accept="image/*"
+                            accept="application/pdf"
                             style={{ display: 'none' }}
                             id="raised-button-file"
                             multiple
                             type="file"
                             onChange={handleChangeInput}
                         />
+
                         <label htmlFor="raised-button-file">
                             <Button variant="outlined" component="span" >
                                 Upload
                             </Button>
                         </label>
+                        <p style={{ display: "inline", marginLeft: "10px" }}>{fileName}</p>
                     </div>
                 )
             // return 'This is the bit I really care about!';
@@ -162,9 +163,7 @@ function Upload() {
             ...sheetmusic,
             file: e.target.files
         })
-        return (
-            <h1>testasdahdoashdouh</h1>
-        )
+        setFileName(e.target.files[0].name);
     }
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
