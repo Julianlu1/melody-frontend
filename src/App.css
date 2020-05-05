@@ -17,12 +17,14 @@ body{
   line-height: 1.4;
 }
 
+
 .homepageBackground{
-  background-color: #7989f2;
-  /* background-image: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)) ,url("https://lh3.googleusercontent.com/proxy/Dvs7Pwb5gyyXpG38eNQb3oyj_mZ7uxFcn89fE-5HnvNZREYrprCXEHtxa65BSG702B9MXwPNsdzZmcFsyuazaVN_LYhMKEuqUtJisUL3MouACaUF8rb8HxLpwIc9dZMUgzpEfOVpq9uDRY0SYWi0He6EtK0FXf6zpv-prLeQW41J91GITxVQ");
+  /* background-color: #7989f2; */
+  margin-top: -15vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)) ,url("./img/bg.jpg");
   background-repeat: no-repeat;
-  background-size: cover; */
-  height:85vh; /* Dit aanpassen zodat de hoogte van de achtergrond wordt aangepast */
+  background-size: cover;
+  height:100vh; /* Dit aanpassen zodat de hoogte van de achtergrond wordt aangepast */
 }
 
 a{
@@ -36,7 +38,7 @@ a{
 }
 
 section{
-  padding-top: 100px;
+  padding-top: 50px;
 }
 
 /* ----- BUTTONS ----- */
@@ -81,5 +83,5 @@ h2:after{
   content: " ";
   width: 100px;
   margin: 0 auto;
-  margin-top: 30px;
+  margin-top: 15px;
 }

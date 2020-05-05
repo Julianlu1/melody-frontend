@@ -2,6 +2,7 @@ import React from 'react';
 import Upload from '../components/Upload';
 
 function DashBoardPage() {
+    window.sessionStorage.setItem('isHomepage', false);
 
     return (
         <div className="container">

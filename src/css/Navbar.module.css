@@ -1,6 +1,11 @@
-nav{
+.navGeneral{
     background-color: #7989f2;
     height:15vh;
+}
+
+.navHome{
+    background-color: transparent;
+    height: 15vh;  
 }
 
 .row{
@@ -9,6 +14,7 @@ nav{
 }
 
 .logo{
+    margin-top: 15px;
     height: 100px;
     width: auto;
     float: left;

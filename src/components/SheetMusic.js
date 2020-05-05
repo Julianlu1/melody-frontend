@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { Document, Page } from 'react-pdf';
+import React, { useState, useEffect } from 'react'
+import { Document, Page, pdfjs } from 'react-pdf';
+
 
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -12,21 +13,53 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
 import styles from '../css/SheetMusic.module.css';
+import { makeStyles } from '@material-ui/core/styles';
 
+
+const useStyles = makeStyles(theme => ({
+    documentSize: {
+        height: 300
+    },
+    center: {
+        textAlign: 'center'
+    }
+}))
 
 function SheetMusic(props) {
-    console.log(props.sheet);
-    const pdfString = "data:application/pdf;base64," + props.sheet.pdf;
+    const classes = useStyles();
 
-    // function onDocumentLoadSuccess(numPages) {
-    //     setNumPages(numPages)
-    //     console.log("test");
-    // }
+    const [numPages, setNumPages] = useState();
+    const [pageNumber, setPageNumber] = useState(1);
+
+    console.log(props.sheet);
+
+    function onDocumentLoadSuccess(numPages) {
+        const sNumber = numPages._pdfInfo.numPages;
+        setNumPages(sNumber);
+    }
+
+    function handlePdfViewer() {
+        console.log("test");
+        pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+    }
+
+    useEffect(() => {
+        handlePdfViewer();
+    }, [])
+
     return (
         <div>
+
             <Card className={styles.root}>
                 <CardActionArea>
-                    <CardMedia className={styles.media} image="https://historiek.net/wp-content/uploads-phistor1/2016/12/Johann-Sebastian-Bach.jpeg" title="Bach" />
+                    <Document
+                        file={"http://localhost:8090/images/" + props.sheet.pdf}
+                        onLoadSuccess={onDocumentLoadSuccess.bind(this)}
+                        onLoadError={console.error}
+                    >
+                        <Page pageNumber={pageNumber} height={300} width={250} />
+                    </Document>
+                    <p className={classes.center}>Page {pageNumber} of {numPages}</p>
                 </CardActionArea>
                 <CardContent>
                     <Typography

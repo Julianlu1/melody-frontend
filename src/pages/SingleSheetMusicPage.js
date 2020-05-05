@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Document, Page, pdfjs } from 'react-pdf';
 import Grid from '@material-ui/core/Grid';
 import CardMedia from '@material-ui/core/CardMedia';
 import TextField from '@material-ui/core/TextField';
@@ -10,8 +11,8 @@ import styles from '../css/SingleSheetMusicPage.css';
 import StarRating from '../components/StarRating';
 
 const useStyles = makeStyles(theme => ({
-    sheetImage: {
-        height: 500,
+    center: {
+        textAlign: 'center',
     },
     details: {
         marginTop: 25,
@@ -30,19 +31,37 @@ const useStyles = makeStyles(theme => ({
         marginLeft: 500
     },
     button: {
-        marginTop: 50,
         marginRight: 10
     }
 }));
 
 function SingleSheetMusicPage(props) {
+    const classes = useStyles();
+    const [numPages, setNumPages] = useState();
+    const [pageNumber, setPageNumber] = useState(1);
+
     const [sheetmusic, setSheetmusic] = useState([]);
     const [comment, setComment] = useState({
         description: '',
         score: 0
     });
-    const filePath = `file:///D:/FontysICT/Semester%204/Fun4/Melody/melody-backend/target/classes/pdf/${sheetmusic.pdf}`;
-    const classes = useStyles();
+    window.sessionStorage.setItem('isHomepage', false);
+
+    // PDF LOADER
+    function onDocumentLoadSuccess(numPages) {
+        const sNumber = numPages._pdfInfo.numPages;
+        setNumPages(sNumber);
+    }
+
+    function handlePdfViewer() {
+        console.log("test");
+        pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+    }
+
+    useEffect(() => {
+        handlePdfViewer();
+    }, [])
+    //
 
     function getSheetmusic() {
         fetch('http://localhost:8090/sheetmusic/' + props.match.params.id)
@@ -87,9 +106,8 @@ function SingleSheetMusicPage(props) {
             },
             body: JSON.stringify({
                 sheetId: props.match.params.id,
-                title: comment,
-                description: "",
-                score: 10
+                description: comment.description,
+                score: comment.score
             })
         }).then(response => {
             response.json();
@@ -100,7 +118,6 @@ function SingleSheetMusicPage(props) {
                 console.log("Niet gelukt");
             }
         })
-
     }
 
     // Voorkomt de infinite loop
@@ -114,7 +131,13 @@ function SingleSheetMusicPage(props) {
             <Grid container spacing={3} >
                 <Grid item md={4} className="section-1">
                     <h1>{sheetmusic.title}</h1>
-                    <CardMedia className={classes.sheetImage} image="https://musescore.com/static/musescore/scoredata/gen/6/0/7/3291706/7a70ebdcc95c47e646069960d4e97710703cad3d/score_0.png@500x660?no-cache=1579172803&bgclr=ffffff" title="Bach" />
+                    <Document
+                        file={"http://localhost:8090/images/" + sheetmusic.pdf}
+                        onLoadSuccess={onDocumentLoadSuccess.bind(this)}
+                        onLoadError={console.error}
+                    >
+                        <Page pageNumber={pageNumber} height={500} width={350} />
+                    </Document>
                 </Grid>
                 <Grid item md={4}>
                     <h2>Details</h2>
@@ -136,12 +159,15 @@ function SingleSheetMusicPage(props) {
                         onChange={handleChange}
                     />
                     <StarRating className={classes.rating} onSelectChange={handleChangeRating} />
-                    <Button className={classes.button} variant="contained" color="primary" onClick={placeComment} >
-                        Plaats reactie
+                    <div className={classes.center}>
+                        <Button className={classes.button} variant="contained" color="primary" onClick={placeComment} >
+                            Plaats reactie
                         </Button>
-                    <Button className={classes.button} variant="contained" color="default" onClick={downloadSheet} >
-                        Download sheet
+                        <Button className={classes.button} variant="contained" color="default" onClick={downloadSheet} >
+                            Download sheet
                     </Button>
+                    </div>
+
                 </Grid>
                 <Grid item md={4}>
                     <h2>Comments</h2>

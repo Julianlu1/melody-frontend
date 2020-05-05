@@ -32,8 +32,9 @@ export default class SheetMusicPage extends Component {
     }
 
     render() {
+        window.sessionStorage.setItem('isHomepage', false);
         return (
-            <div className="container">
+            <div className="container" >
                 <h2>Blader hier door bladmuziek.</h2>
                 <Filter />
                 <GridList cols={4} cellHeight={600}>

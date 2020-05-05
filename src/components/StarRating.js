@@ -23,7 +23,7 @@ function StarRating(props) {
     }
 
     return (
-        <div>
+        <div style={{ textAlign: 'center', marginTop: '15px' }}>
             <Box component="fieldset" mb={3} borderColor="transparent">
                 <Typography component="legend">Rating</Typography>
                 <StyledRating

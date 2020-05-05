@@ -1,8 +1,9 @@
 .hero{
-    padding: 20% 0;
+    padding: 25% 0;
 }
 
 .hero h1{
+    color: #ffffff;
     margin-bottom: 15px;
     word-spacing: 4px;
     letter-spacing: 1px;

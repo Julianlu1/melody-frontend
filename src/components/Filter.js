@@ -32,15 +32,23 @@ function Filter(props) {
     const { classes } = props;
 
     const [instrument, setInstrument] = React.useState('');
+    const [componist, setComponist] = React.useState('');
 
     const handleChange = (event) => {
         setInstrument(event.target.value);
     };
 
+    function handleComponist(event) {
+        setComponist(event.target.value);
+    }
+
+    function handleFilter() {
+
+    }
     return (
         <div className={classes.center}>
             <FormControl className={classes.inputMargin} >
-                <TextField id="standard-basic" label="Componist" />
+                <TextField id="standard-basic" label="Componist" onChange={handleComponist} />
             </FormControl>
             <FormControl className={classes.inputMargin}>
                 <InputLabel shrink id="demo-simple-select-placeholder-label-label">
@@ -58,7 +66,7 @@ function Filter(props) {
                 </Select>
 
             </FormControl>
-            <Button className={classes.buttonMargin} variant="contained" color="primary">
+            <Button className={classes.buttonMargin} variant="contained" color="primary" onClick={handleFilter}>
                 Filter
             </Button>
         </div>

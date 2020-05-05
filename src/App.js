@@ -16,7 +16,6 @@ import ProtectedRoute from './protected.route.js';
 
 function App() {
   const token = window.sessionStorage.getItem('token');
-
   return (
     <div className="App">
       <Navbar {...{ token }} />
