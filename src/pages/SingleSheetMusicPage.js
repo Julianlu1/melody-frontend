@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import styles from '../css/SingleSheetMusicPage.css';
 
 import StarRating from '../components/StarRating';
+import Comments from '../components/Comments';
 
 const useStyles = makeStyles(theme => ({
     center: {
@@ -54,7 +55,6 @@ function SingleSheetMusicPage(props) {
     }
 
     function handlePdfViewer() {
-        console.log("test");
         pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
     }
 
@@ -63,12 +63,14 @@ function SingleSheetMusicPage(props) {
     }, [])
     //
 
-    function getSheetmusic() {
-        fetch('http://localhost:8090/sheetmusic/' + props.match.params.id)
+    async function getSheetmusic() {
+        await fetch('http://localhost:8090/sheetmusic/' + props.match.params.id)
             .then(res => res.json())
             .then((data) => {
                 setSheetmusic(data);
-                console.log(sheetmusic)
+                // console.log(sheetmusic)
+                console.log(sheetmusic.comments[0]);
+
             })
             .catch(console.log)
     }
@@ -170,7 +172,7 @@ function SingleSheetMusicPage(props) {
 
                 </Grid>
                 <Grid item md={4}>
-                    <h2>Comments</h2>
+                    <Comments item={sheetmusic.comments} />
                 </Grid>
 
             </Grid>
