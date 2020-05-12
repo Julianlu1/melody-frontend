@@ -11,6 +11,9 @@ export default class SheetMusicPage extends Component {
         sheetmusic: []
     }
 
+    constructor(props) {
+        super(props);
+    }
     componentDidMount() {
         fetch('http://localhost:8090/sheetmusic')
             .then(res => res.json())
@@ -18,6 +21,30 @@ export default class SheetMusicPage extends Component {
                 this.setState({ sheetmusic: data });
             })
             .catch(console.log)
+    }
+
+    handleFilter(instrument, componist) {
+        let filterString = "";
+
+        console.log(instrument, componist);
+        if (instrument != "" && componist != "") {
+            filterString += `?componist=${componist}&?instrument=${instrument}`;
+        }
+        else if (instrument != "") {
+            filterString += `?instrument=${instrument}`;
+        }
+        else if (componist != "") {
+            filterString += `?componist=${componist}`;
+        }
+        fetch('http://localhost:8090/sheetmusic/filter' + filterString, {
+            method: "get",
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(res => res.json())
+            .then((data) => {
+                this.setState({ sheetmusic: data });
+            })
     }
 
     testFunction() {
@@ -36,7 +63,7 @@ export default class SheetMusicPage extends Component {
         return (
             <div className="container" >
                 <h2>Blader hier door bladmuziek.</h2>
-                <Filter />
+                <Filter doSomethingWhenFilterClicked={this.handleFilter.bind(this)} />
                 <GridList cols={4} cellHeight={600}>
                     {this.state.sheetmusic.map((item) => (
                         <GridListTile key={item.id}>

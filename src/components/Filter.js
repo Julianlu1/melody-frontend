@@ -43,7 +43,7 @@ function Filter(props) {
     }
 
     function handleFilter() {
-
+        props.doSomethingWhenFilterClicked(instrument, componist);
     }
     return (
         <div className={classes.center}>
@@ -61,8 +61,10 @@ function Filter(props) {
                     onChange={handleChange}
                     displayEmpty
                 >
-                    <MenuItem value="piano">Piano</MenuItem>
-                    <MenuItem value="gitaar">Gitaar</MenuItem>
+                    <MenuItem value="">-</MenuItem>
+
+                    <MenuItem value="Piano">Piano</MenuItem>
+                    <MenuItem value="Gitaar">Gitaar</MenuItem>
                 </Select>
 
             </FormControl>

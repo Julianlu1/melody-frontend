@@ -32,6 +32,7 @@ function DashboardPopover() {
 
     function handleLogout() {
         Auth.logout();
+        history.push("/");
         window.location.reload();
     }
 

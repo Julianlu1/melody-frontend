@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -11,6 +12,7 @@ import Auth from "../Auth";
 import Link from '@material-ui/core/Link'; // Material UI link, anders dan de react-router-dom link
 
 function Login(props) {
+    const history = useHistory();
     const [open, setOpen] = React.useState(false);
 
     const [username, setUsername] = React.useState();
@@ -64,6 +66,7 @@ function Login(props) {
             .then(data => {
                 if (data.token != null) {
                     Auth.login(data.token);
+                    history.push("/dashboard");
                     window.location.reload();
                 }
                 else if (data.message === "Unauthorized") {
