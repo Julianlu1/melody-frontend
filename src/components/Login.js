@@ -1,4 +1,8 @@
 import React from 'react';
+
+import Auth from "../Auth";
+import Global from "../services/Global";
+
 import { useHistory } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -7,7 +11,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Auth from "../Auth";
+
 
 import Link from '@material-ui/core/Link'; // Material UI link, anders dan de react-router-dom link
 
@@ -53,7 +57,7 @@ function Login(props) {
     }
 
     function login() {
-        fetch('http://localhost:8090/authenticate', {
+        fetch(`${Global.restServer}/authenticate`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

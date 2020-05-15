@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+
+import Global from "../services/Global";
+
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
+
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
+
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -44,6 +51,8 @@ const useStyles = makeStyles((theme) => ({
 function Upload() {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
+    const [open, setOpen] = useState(false);
+
     const steps = getSteps();
 
     const [sheetmusic, setSheetmusic] = useState({
@@ -64,12 +73,12 @@ function Upload() {
         formData.append("instrument", sheetmusic.instrument);
         formData.append("file", sheetmusic.file[0]);
 
-        fetch('http://localhost:8090/sheetmusic', {
+        fetch(`${Global.restServer}/sheetmusic`, {
             method: 'POST',
             body: formData
         }).then(response => {
             if (response.status == 200) {
-                alert('succesvol toegevoegd!')
+                setOpen(true); // Laat de snackbar zien
             } else {
                 alert('Er is iets foutgegaan')
             }
@@ -183,8 +192,20 @@ function Upload() {
         setActiveStep(0);
     };
 
+    // Snackbar
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    }
     return (
         <div className={classes.root}>
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <MuiAlert onClose={handleClose} severity="success">
+                    Bladmuziek is toegevoegd! Bedankt!
+                </MuiAlert>
+            </Snackbar>
             <Stepper activeStep={activeStep} alternativeLabel>
                 {steps.map((label) => (
                     <Step key={label}>

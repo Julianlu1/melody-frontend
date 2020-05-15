@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import Global from "../services/Global";
+
 import SheetMusic from '../components/SheetMusic';
 import Filter from '../components/Filter';
 
@@ -15,7 +18,7 @@ export default class SheetMusicPage extends Component {
         super(props);
     }
     componentDidMount() {
-        fetch('http://localhost:8090/sheetmusic')
+        fetch(`${Global.restServer}/sheetmusic`)
             .then(res => res.json())
             .then((data) => {
                 this.setState({ sheetmusic: data });
@@ -36,7 +39,7 @@ export default class SheetMusicPage extends Component {
         else if (componist != "") {
             filterString += `?componist=${componist}`;
         }
-        fetch('http://localhost:8090/sheetmusic/filter' + filterString, {
+        fetch(`${Global.restServer}/sheetmusic/filter${filterString}`, {
             method: "get",
             headers: {
                 'content-type': 'application/json'

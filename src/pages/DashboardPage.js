@@ -71,6 +71,8 @@ function DashBoardPage() {
                         <MenuList>
                             <MenuItem onClick={handleProfile}>Mijn profiel</MenuItem>
                             <MenuItem onClick={handleUpload}>Sheet music toevoegen</MenuItem>
+                            <MenuItem>Mijn geüploade bladmuziek</MenuItem>
+                            <MenuItem>Mijn gespeelde bladmuziek</MenuItem>
                             <MenuItem onClick={logout}>Logout</MenuItem>
                         </MenuList>
                     </Paper>

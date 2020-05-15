@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import Global from "../services/Global";
+
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -11,6 +13,8 @@ import styles from '../css/Register.css';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -35,6 +39,8 @@ function Register() {
     const [username, setUsername] = React.useState();
     const [password, setPassword] = React.useState();
 
+    const [open, setOpen] = React.useState(false);
+
     function handleInputChange(event) {
         const target = event.target;
         const value = target.value;
@@ -50,8 +56,17 @@ function Register() {
         }
     }
 
+    // Snackbar
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    }
+
     function register() {
-        fetch('http://localhost:8090/register', {
+        fetch(`${Global.restServer}/register`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -62,7 +77,7 @@ function Register() {
             })
         }).then(response => {
             if (response.status == 200) {
-                alert("Succesvol geregistreerd!");
+                setOpen(true);
             } else {
                 alert("Oeps. Er is iets misgegaan, probeer het opnieuw.");
             }
@@ -71,6 +86,11 @@ function Register() {
 
     return (
         <div className="container">
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <MuiAlert onClose={handleClose} severity="success">
+                    Registeren is gelukt!
+                </MuiAlert>
+            </Snackbar>
             <div className="form">
                 <h2 className={classes.h2}>Ik ben nieuw hier.</h2>
                 <TextField name="username" fullWidth className={classes.input} label="Gebruikersnaam" variant="outlined" onChange={handleInputChange} />

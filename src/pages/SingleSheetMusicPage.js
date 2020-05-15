@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+
+import Global from "../services/Global";
+
 import { Document, Page, pdfjs } from 'react-pdf';
 import Grid from '@material-ui/core/Grid';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -64,7 +67,7 @@ function SingleSheetMusicPage(props) {
     //
 
     async function getSheetmusic() {
-        await fetch('http://localhost:8090/sheetmusic/' + props.match.params.id)
+        await fetch(`${Global.restServer}/sheetmusic/${props.match.params.id}`)
             .then(res => res.json())
             .then((data) => {
                 setSheetmusic(data);
@@ -76,7 +79,7 @@ function SingleSheetMusicPage(props) {
     }
 
     function downloadSheet() {
-        window.open('http://localhost:8090' + "/images/" + sheetmusic.pdf);
+        window.open(`${Global.restServer}` + "/images/" + sheetmusic.pdf);
     }
 
     // De waarde van de descriptionbox setten
@@ -99,7 +102,7 @@ function SingleSheetMusicPage(props) {
         console.log(comment);
         debugger
         // Titel en description in variabele zetten
-        fetch('http://localhost:8090/comments', {
+        fetch(`${Global.restServer}/comments`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
