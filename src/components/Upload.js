@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Global from "../services/Global";
+import { addSheetMusic } from "../services/SheetMusicService";
 
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -66,18 +67,8 @@ function Upload() {
     let [fileName, setFileName] = useState('');
 
     function uploadSheet() {
-        const formData = new FormData;
-        formData.append("title", sheetmusic.title);
-        formData.append("componist", sheetmusic.componist);
-        formData.append("key", sheetmusic.key);
-        formData.append("instrument", sheetmusic.instrument);
-        formData.append("file", sheetmusic.file[0]);
-
-        fetch(`${Global.restServer}/sheetmusic`, {
-            method: 'POST',
-            body: formData
-        }).then(response => {
-            if (response.status == 200) {
+        addSheetMusic(sheetmusic).then(res => {
+            if (res.status == 200) {
                 setOpen(true); // Laat de snackbar zien
             } else {
                 alert('Er is iets foutgegaan')

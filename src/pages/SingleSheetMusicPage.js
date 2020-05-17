@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
 import Global from "../services/Global";
+import { addComment } from "../services/CommentService";
 
 import { Document, Page, pdfjs } from 'react-pdf';
 import Grid from '@material-ui/core/Grid';
-import CardMedia from '@material-ui/core/CardMedia';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
@@ -14,7 +14,13 @@ import styles from '../css/SingleSheetMusicPage.css';
 import StarRating from '../components/StarRating';
 import Comments from '../components/Comments';
 
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
 const useStyles = makeStyles(theme => ({
+    title: {
+        fontWeight: '700'
+    },
     center: {
         textAlign: 'center',
     },
@@ -43,6 +49,7 @@ function SingleSheetMusicPage(props) {
     const classes = useStyles();
     const [numPages, setNumPages] = useState();
     const [pageNumber, setPageNumber] = useState(1);
+    const [open, setOpen] = useState(false);
 
     const [sheetmusic, setSheetmusic] = useState([]);
     const [comment, setComment] = useState({
@@ -99,28 +106,12 @@ function SingleSheetMusicPage(props) {
     }
 
     function placeComment() {
-        console.log(comment);
-        debugger
-        // Titel en description in variabele zetten
-        fetch(`${Global.restServer}/comments`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + window.sessionStorage.getItem("token")
-            },
-            body: JSON.stringify({
-                sheetId: props.match.params.id,
-                description: comment.description,
-                score: comment.score
-            })
-        }).then(response => {
-            response.json();
-            console.log(response);
-            if (response.ok) {
-                console.log("comment geplaatst");
+        // props.match.params.id haalt het id op van de sheetmusic
+        addComment(comment, props.match.params.id).then(res => {
+            if (res.status === 200) {
+                setOpen(true);
             } else {
-                console.log("Niet gelukt");
+                alert("Er is iets fout gegaan");
             }
         })
     }
@@ -131,11 +122,24 @@ function SingleSheetMusicPage(props) {
         getSheetmusic();
     }, [sheetmusic.id])
 
+    // Snackbar
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    }
+
     return (
         <div className="container">
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <MuiAlert onClose={handleClose} severity="success">
+                    Reactie is geplaatst! Bedankt!
+                </MuiAlert>
+            </Snackbar>
             <Grid container spacing={3} >
-                <Grid item md={4} className="section-1">
-                    <h1>{sheetmusic.title}</h1>
+                <Grid item md={4}>
+                    <h1 className={classes.title}>{sheetmusic.title}</h1>
                     <Document
                         file={"http://localhost:8090/images/" + sheetmusic.pdf}
                         onLoadSuccess={onDocumentLoadSuccess.bind(this)}
