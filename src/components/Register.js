@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
 import Global from "../services/Global";
+import { signUp } from "../services/UserService";
+
 
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -66,17 +68,9 @@ function Register() {
     }
 
     function register() {
-        fetch(`${Global.restServer}/register`, {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: username,
-                password: password
-            })
-        }).then(response => {
-            if (response.status == 200) {
+
+        signUp(username, password).then((res) => {
+            if (res.status === 200) {
                 setOpen(true);
             } else {
                 alert("Oeps. Er is iets misgegaan, probeer het opnieuw.");

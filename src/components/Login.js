@@ -2,6 +2,7 @@ import React from 'react';
 
 import Auth from "../Auth";
 import Global from "../services/Global";
+import { signIn } from "../services/UserService";
 
 import { useHistory } from "react-router-dom";
 import Button from '@material-ui/core/Button';
@@ -57,26 +58,15 @@ function Login(props) {
     }
 
     function login() {
-        fetch(`${Global.restServer}/authenticate`, {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: username,
-                password: password
-            })
-        }).then(response => response.json())
-            .then(data => {
-                if (data.token != null) {
-                    Auth.login(data.token);
-                    history.push("/dashboard");
-                    window.location.reload();
-                }
-                else if (data.message === "Unauthorized") {
-                    alert("Gebruikersnaam of wachtwoord klopt niet");
-                }
-            })
+        signIn(username, password).then((res) => {
+            if (res.token != null) {
+                Auth.login(res.token);
+                history.push("/dashboard");
+                window.location.reload();
+            } else if (res.message == "Unauthorized") {
+                alert("Gebruikersnaam of wachtwoord klopt niet");
+            }
+        })
     }
 
     return (
