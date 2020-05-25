@@ -46,6 +46,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function SingleSheetMusicPage(props) {
+    const [isLoading, setLoading] = useState(true);
     const classes = useStyles();
     const [numPages, setNumPages] = useState();
     const [pageNumber, setPageNumber] = useState(1);
@@ -78,9 +79,9 @@ function SingleSheetMusicPage(props) {
             .then(res => res.json())
             .then((data) => {
                 setSheetmusic(data);
+                setLoading(false);
                 // console.log(sheetmusic)
-                console.log(sheetmusic.comments[0]);
-
+                console.log(sheetmusic);
             })
             .catch(console.log)
     }
@@ -179,7 +180,8 @@ function SingleSheetMusicPage(props) {
 
                 </Grid>
                 <Grid item md={4}>
-                    <Comments item={sheetmusic.comments} />
+                    {!isLoading && <Comments comments={sheetmusic.comments} />}
+
                 </Grid>
 
             </Grid>

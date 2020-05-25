@@ -26,55 +26,13 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-function Comments(...props) {
+function Comments(props) {
     const classes = useStyles();
-
-    const [comments, setComments] = useState([
-        {
-            id: "1",
-            username: "Henkjan",
-            sheet_music_id: "43",
-            description: "Hele mooi muziek bla bla bla bla bla bla bla bla bla",
-            score: "8"
-        },
-        {
-            id: "2",
-            username: "Pietje",
-            sheet_music_id: "43",
-            description: "Hele lelijke muziek",
-            score: "5"
-        },
-        {
-            id: "3",
-            username: "Peter",
-            sheet_music_id: "43",
-            description: "Hmmmmmm",
-            score: "5"
-        }
-    ]);
+    console.log(props);
     const [commentNr, setCommentNr] = useState(0);
 
-    function checkComments() {
-        if (props[0].item != null) {
-            setComments(props[0].item, []);
-        } else {
-            console.log("Empty array");
-        }
-    }
-
-
-    useEffect(() => {
-        checkComments();
-    }, []);
-
-
-    function handleComments() {
-        if (comments != null) {
-            console.log("Test");
-        }
-    }
-
     function handleBack() {
+        // console.log(props[0]);
 
         if (commentNr != 0) {
             setCommentNr(commentNr - 1);
@@ -85,7 +43,7 @@ function Comments(...props) {
     }
 
     function handleForward() {
-        if (commentNr < (comments.length - 1)) {
+        if (commentNr < (props.comments.length - 1)) {
             setCommentNr(commentNr + 1);
         }
         console.log(commentNr);
@@ -94,18 +52,15 @@ function Comments(...props) {
     return (
         <div>
             <h2>Comments</h2>
-            {comments.map((item) => (
-                <h1>test</h1>
-            ))}
             <Paper style={{ padding: "40px 20px", marginTop: "15px" }}>
                 <Grid container wrap="nowrap" spacing={2}>
                     <Grid item>
                         <Avatar alt="Remy Sharp" src="https://cdn4.iconfinder.com/data/icons/human-user-business-person-avatars/100/23A-1User-512.png" />
                     </Grid>
                     <Grid justifyContent="left" item xs zeroMinWidth>
-                        <h4 className={classes.title}>{comments[commentNr].username} {comments[commentNr].score}  x <FavoriteIcon style={{ color: "#ff6d75" }} fontSize="small" /></h4>
+                        <h4 className={classes.title}>{props.comments[commentNr].username} {props.comments[commentNr].score}  x <FavoriteIcon style={{ color: "#ff6d75" }} fontSize="small" /></h4>
                         <p className={classes.description}>
-                            {comments[commentNr].description}
+                            {props.comments[commentNr].description}
                         </p>
                         <p className={classes.subDescription}>
                             posted 1 minute ago

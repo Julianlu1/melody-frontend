@@ -21,7 +21,7 @@ body{
 .homepageBackground{
   /* background-color: #7989f2; */
   margin-top: -15vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)) ,url("./img/bg.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)) ,url("./img/rsz_bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   height:100vh; /* Dit aanpassen zodat de hoogte van de achtergrond wordt aangepast */

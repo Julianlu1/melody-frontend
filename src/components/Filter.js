@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -6,6 +6,7 @@ import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+import { getInstruments } from '../services/InstrumentService';
 
 import styles from '../css/Filter.module.css';
 
@@ -28,10 +29,11 @@ const inputStyles = theme => ({
     }
 });
 
+
 function Filter(props) {
     const { classes } = props;
 
-    const [instrument, setInstrument] = React.useState('');
+    const [instrument, setInstrument] = React.useState([]);
     const [componist, setComponist] = React.useState('');
 
     const handleChange = (event) => {
@@ -45,6 +47,19 @@ function Filter(props) {
     function handleFilter() {
         props.doSomethingWhenFilterClicked(instrument, componist);
     }
+
+    function getAllInstruments() {
+        getInstruments().then(res => res.json())
+            .then((data) => {
+                setInstrument(data);
+                console.log(data);
+            })
+    }
+
+    useEffect(() => {
+        getAllInstruments();
+    }, [])
+
     return (
         <div className={classes.center}>
             <FormControl className={classes.inputMargin} >
@@ -61,10 +76,10 @@ function Filter(props) {
                     onChange={handleChange}
                     displayEmpty
                 >
-                    <MenuItem value="">-</MenuItem>
-
+                    {instrument.map((item) => (
+                        <MenuItem value="Piano">Piano</MenuItem>
+                    ))}
                     <MenuItem value="Piano">Piano</MenuItem>
-                    <MenuItem value="Gitaar">Gitaar</MenuItem>
                 </Select>
 
             </FormControl>
