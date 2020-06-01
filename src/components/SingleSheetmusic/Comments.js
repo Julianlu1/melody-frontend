@@ -28,11 +28,11 @@ const useStyles = makeStyles(theme => ({
 
 function Comments(props) {
     const classes = useStyles();
-    console.log(props);
+    // console.log(props);
     const [commentNr, setCommentNr] = useState(0);
+    console.log(props.comments);
 
     function handleBack() {
-        // console.log(props[0]);
 
         if (commentNr != 0) {
             setCommentNr(commentNr - 1);
@@ -52,19 +52,25 @@ function Comments(props) {
     return (
         <div>
             <h2>Comments</h2>
+
             <Paper style={{ padding: "40px 20px", marginTop: "15px" }}>
                 <Grid container wrap="nowrap" spacing={2}>
                     <Grid item>
                         <Avatar alt="Remy Sharp" src="https://cdn4.iconfinder.com/data/icons/human-user-business-person-avatars/100/23A-1User-512.png" />
                     </Grid>
                     <Grid justifyContent="left" item xs zeroMinWidth>
-                        <h4 className={classes.title}>{props.comments[commentNr].username} {props.comments[commentNr].score}  x <FavoriteIcon style={{ color: "#ff6d75" }} fontSize="small" /></h4>
-                        <p className={classes.description}>
-                            {props.comments[commentNr].description}
-                        </p>
-                        <p className={classes.subDescription}>
-                            posted 1 minute ago
-            </p>
+                        {
+                            props.comments.length > 0 &&
+                            <div>
+                                <h4 className={classes.title}>{props.comments[commentNr].username} {props.comments[commentNr].score}  x <FavoriteIcon style={{ color: "#ff6d75" }} fontSize="small" /></h4>
+                                <p className={classes.description}>
+                                    {props.comments[commentNr].description}
+                                </p>
+                                <p className={classes.subDescription}>
+                                    posted 1 minute ago
+                                 </p>
+                            </div>
+                        }
                     </Grid>
                 </Grid>
             </Paper>

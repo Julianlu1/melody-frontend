@@ -4,7 +4,7 @@ import Popover from '@material-ui/core/Popover';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-import Auth from '../Auth';
+import Auth from '../../Auth';
 import { useHistory } from 'react-router-dom';
 import Link from '@material-ui/core/Link'; // Material UI link, anders dan de react-router-dom link
 

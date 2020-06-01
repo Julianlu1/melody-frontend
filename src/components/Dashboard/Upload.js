@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Global from "../services/Global";
-import { addSheetMusic } from "../services/SheetMusicService";
+import Global from "../../services/Global";
+import { getInstruments } from '../../services/InstrumentService';
+import { addSheetMusic } from "../../services/SheetMusicService";
 
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -60,9 +61,12 @@ function Upload() {
         title: '',
         componist: '',
         key: '',
-        instrument: '',
+        instrument_id: 1,
         file: null
     });
+
+    const [instruments, setInstruments] = useState();
+
 
     let [fileName, setFileName] = useState('');
 
@@ -75,6 +79,17 @@ function Upload() {
             }
         })
     }
+
+    function getAllInstruments() {
+        getInstruments().then(res => res.json()).then(data => {
+            setInstruments(data);
+        })
+    }
+    useEffect(() => {
+        getAllInstruments();
+    }, [])
+    console.log(instruments);
+
     function getSteps() {
         return ['Wat is de titel en componist?', 'In welke key is het geschreven en wat is het instrument en componist?', 'Upload PDF'];
     }
@@ -101,8 +116,10 @@ function Upload() {
                             value={sheetmusic.instrument}
                             onChange={handleChangeInstrument}
                         >
-                            <MenuItem value="piano">Piano</MenuItem>
-                            <MenuItem value="gitaar">Gitaar</MenuItem>
+                            {instruments.map((item) => (
+                                <MenuItem value={item.id}>{item.description}</MenuItem>
+                            ))}
+
                         </Select>
                     </div>
                 )
@@ -154,7 +171,7 @@ function Upload() {
     function handleChangeInstrument(e) {
         setSheetmusic({
             ...sheetmusic,
-            instrument: e.target.value
+            instrument_id: e.target.value
         })
     }
 

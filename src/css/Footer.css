@@ -1,0 +1,47 @@
+.footer{
+   display:flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #a9a9a9;
+    height: 250px;
+    margin-top: 150px;
+    padding-top: 50px;
+}
+
+/* SECTION social-icons */
+.social-icons{
+    color:#fff;
+    margin-bottom: 25px;
+}
+
+.icon{
+    margin-right: 15px;
+}
+
+/* SECTION links */
+.footer .links li {
+    display:inline;
+    margin: 10px 15px;
+}
+
+.footer .links ul li a{
+    color: #fff;
+    transition: 0.25s;
+
+
+}
+.footer .links ul li a:hover{
+    color: #ff3b3f;
+}
+.footer .links ul li a:after{
+    content: "|";
+    padding-left:20px;
+}
+
+/* SECTION copyright */
+
+.footer p{
+    width: 100%;
+    color:#fff;
+    margin-top: 50px;
+}

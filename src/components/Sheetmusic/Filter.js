@@ -6,9 +6,9 @@ import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-import { getInstruments } from '../services/InstrumentService';
+import { getInstruments } from '../../services/InstrumentService';
 
-import styles from '../css/Filter.module.css';
+import styles from '../../css/Filter.module.css';
 
 
 const inputStyles = theme => ({
@@ -33,25 +33,52 @@ const inputStyles = theme => ({
 function Filter(props) {
     const { classes } = props;
 
-    const [instrument, setInstrument] = React.useState([]);
+    const [selectedInstrument, setSelectedInstrument] = React.useState();
+    const [instruments, setInstruments] = React.useState([]);
     const [componist, setComponist] = React.useState('');
+    const [key, setKey] = React.useState('');
+
+    const [filter, setFilter] = React.useState({
+        instrument_id: "",
+        componist: "",
+        key: ""
+    })
 
     const handleChange = (event) => {
-        setInstrument(event.target.value);
+
+        setFilter({
+            ...filter,
+            instrument_id: event.target.value
+        })
+        // setSelectedInstrument(event.target.value);
     };
 
     function handleComponist(event) {
-        setComponist(event.target.value);
+        setFilter({
+            ...filter,
+            componist: event.target.value
+        })
+
+        console.log(filter);
+        // setComponist(event.target.value);
+    }
+
+    function handleKey(event) {
+        setFilter({
+            ...filter,
+            key: event.target.value
+        })
+        setKey(event.target.value);
     }
 
     function handleFilter() {
-        props.doSomethingWhenFilterClicked(instrument, componist);
+        props.doSomethingWhenFilterClicked(filter);
     }
 
     function getAllInstruments() {
         getInstruments().then(res => res.json())
             .then((data) => {
-                setInstrument(data);
+                setInstruments(data);
                 console.log(data);
             })
     }
@@ -65,6 +92,9 @@ function Filter(props) {
             <FormControl className={classes.inputMargin} >
                 <TextField id="standard-basic" label="Componist" onChange={handleComponist} />
             </FormControl>
+            <FormControl className={classes.inputMargin} >
+                <TextField id="standard-basic" label="Key" onChange={handleKey} />
+            </FormControl>
             <FormControl className={classes.inputMargin}>
                 <InputLabel shrink id="demo-simple-select-placeholder-label-label">
                     Instrument
@@ -72,14 +102,14 @@ function Filter(props) {
                 <Select
                     labelId="demo-simple-select-placeholder-label-label"
                     id="demo-simple-select-placeholder-label"
-                    value={instrument}
+                    value={selectedInstrument}
                     onChange={handleChange}
                     displayEmpty
                 >
-                    {instrument.map((item) => (
-                        <MenuItem value="Piano">Piano</MenuItem>
+                    {instruments.map((item) => (
+                        <MenuItem value={item.id}>{item.description}</MenuItem>
                     ))}
-                    <MenuItem value="Piano">Piano</MenuItem>
+
                 </Select>
 
             </FormControl>

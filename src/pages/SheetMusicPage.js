@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 import Global from "../services/Global";
 
-import SheetMusic from '../components/SheetMusic';
-import Filter from '../components/Filter';
+import SheetMusic from '../components/Sheetmusic/SheetMusic';
+import Filter from '../components/Sheetmusic/Filter';
 
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
@@ -26,19 +26,22 @@ export default class SheetMusicPage extends Component {
             .catch(console.log)
     }
 
-    handleFilter(instrument, componist) {
-        let filterString = "";
+    handleFilter(filter) {
+        let filterString = "?";
+        // Filteren werkt nu, getest in postman
+        // Nu nog request uitvoeren
+        Object.entries(filter).forEach(([key, val]) => {
+            console.log(key); // the name of the current key.
+            console.log(val); // the value of the current key.
+            if (val != "") {
+                console.log("")
+                filterString += key + "=" + val + "&";
+            }
 
-        console.log(instrument, componist);
-        if (instrument != "" && componist != "") {
-            filterString += `?componist=${componist}&?instrument=${instrument}`;
-        }
-        else if (instrument != "") {
-            filterString += `?instrument=${instrument}`;
-        }
-        else if (componist != "") {
-            filterString += `?componist=${componist}`;
-        }
+        });
+
+        console.log(filterString);
+
         fetch(`${Global.restServer}/sheetmusic/filter${filterString}`, {
             method: "get",
             headers: {

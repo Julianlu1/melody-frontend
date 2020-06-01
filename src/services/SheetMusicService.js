@@ -6,7 +6,7 @@ export function addSheetMusic(sheetmusic) {
     formData.append("title", sheetmusic.title);
     formData.append("componist", sheetmusic.componist);
     formData.append("key", sheetmusic.key);
-    formData.append("instrument", sheetmusic.instrument);
+    formData.append("instrument_id", sheetmusic.instrument_id);
     formData.append("file", sheetmusic.file[0]);
 
     return fetch(`${Global.restServer}/sheetmusic`, {

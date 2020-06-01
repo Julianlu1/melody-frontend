@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import styles from '../css/Navbar.module.css'
+import styles from '../../css/Navbar.module.css'
 import { Link } from 'react-router-dom';
-import Logo from '../img/logo.png';
+import Logo from '../../img/logo.png';
 
 // Login of dashboardpopover laten zien
-import Login from './Login';
+import Login from '../Login';
 import DashboardPopover from './DashboardPopover';
 
 export default class Navbar extends Component {

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import Upload from '../components/Upload';
-import Profile from '../components/Profile';
+import Upload from '../components/Dashboard/Upload';
+import Profile from '../components/Dashboard/Profile';
 
 import Auth from '../Auth';
 

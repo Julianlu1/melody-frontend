@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 
-import Hero from '../components/Hero';
-import Componist from '../components/Componist';
+import Hero from '../components/Homepage/Hero';
+import Componist from '../components/Homepage/Componist';
+import Footer from './../components/General/Footer';
 
-export default class HomePage extends Component {
+export default class Homepage extends Component {
 
     render() {
         window.sessionStorage.setItem('isHomepage', true);
@@ -12,8 +13,10 @@ export default class HomePage extends Component {
                 <div className="container">
                     <Hero />
                     <Componist />
+                    <Footer />
                 </div>
             </div >
+
         )
     }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-import Home from './pages/HomePage';
+import Home from './pages/Homepage';
 import SheetMusic from './pages/SheetMusicPage';
 import SingleSheetMusic from './pages/SingleSheetMusicPage';
 import DashboardPage from './pages/DashboardPage'
@@ -9,7 +9,7 @@ import Register from './components/Register';
 import Error from './pages/ErrorPage';
 
 
-import Navbar from './components/Navbar';
+import Navbar from './components/General/Navbar';
 
 import { Route, Switch } from 'react-router-dom';
 import ProtectedRoute from './protected.route.js';
@@ -29,7 +29,6 @@ function App() {
         <Route exact path="/dashboard" component={DashboardPage} />
         <Route component={Error} />
       </Switch>
-
     </div>
   );
 }

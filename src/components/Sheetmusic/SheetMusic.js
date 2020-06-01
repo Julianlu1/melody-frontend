@@ -8,8 +8,10 @@ import CardContent from '@material-ui/core/CardContent';
 
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-import styles from '../css/SheetMusic.module.css';
+import styles from '../../css/SheetMusic.module.css';
 import { makeStyles } from '@material-ui/core/styles';
 
 
@@ -25,6 +27,10 @@ const useStyles = makeStyles(theme => ({
 function SheetMusic(props) {
     const classes = useStyles();
 
+    const [state, setState] = React.useState({
+        checkedPlayed: false,
+    });
+
     const [numPages, setNumPages] = useState();
     const [pageNumber, setPageNumber] = useState(1);
 
@@ -39,6 +45,10 @@ function SheetMusic(props) {
         console.log("test");
         pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
     }
+
+    const handleChange = (event) => {
+        setState({ ...state, [event.target.name]: event.target.checked });
+    };
 
     useEffect(() => {
         handlePdfViewer();
@@ -73,12 +83,22 @@ function SheetMusic(props) {
                         key {props.sheet.key}
                     </Typography>
                     <Typography variant="body2" component="p">
-                        {props.sheet.instrument}
+                        {props.sheet.instrument_Description}
                     </Typography>
                 </CardContent>
                 <CardActions>
                     <Button size="small" color="primary" variant="outlined" href={`/sheetmusic/${props.sheet.id}`}>Details</Button>
-                </CardActions>
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                checked={state.checkedPlayed}
+                                onChange={handleChange}
+                                name="checkedPlayed"
+                                color="primary"
+                            />
+                        }
+                        label="Gespeeld"
+                    />                </CardActions>
             </Card>
             {/* <Document file={pdfString} onLoadSuccess={onDocumentLoadSuccess}>
                 <Page pageNumber={pageNumber} />

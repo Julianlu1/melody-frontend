@@ -10,8 +10,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 
 import Typography from "@material-ui/core/Typography";
 
-import styles from '../css/Componist.module.css';
-
+import styles from '../../css/Componist.module.css'
 export default class Componist extends Component {
     render() {
         return (

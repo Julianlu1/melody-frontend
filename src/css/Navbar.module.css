@@ -1,6 +1,7 @@
 .navGeneral{
-    background-color: #7989f2;
+    background-color: #a9a9a9;
     height:15vh;
+    box-shadow: 0px 2px #cecdcd;
 }
 
 .navHome{

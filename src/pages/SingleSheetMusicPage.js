@@ -11,8 +11,8 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import styles from '../css/SingleSheetMusicPage.css';
 
-import StarRating from '../components/StarRating';
-import Comments from '../components/Comments';
+import StarRating from '../components/SingleSheetmusic/StarRating';
+import Comments from '../components/SingleSheetmusic/Comments';
 
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -102,11 +102,14 @@ function SingleSheetMusicPage(props) {
     function handleChangeRating(value) {
         setComment({
             ...comment,
-            score: value
+            score: value * 2
         });
+
     }
 
     function placeComment() {
+        console.log(comment);
+
         // props.match.params.id haalt het id op van de sheetmusic
         addComment(comment, props.match.params.id).then(res => {
             if (res.status === 200) {
@@ -154,7 +157,7 @@ function SingleSheetMusicPage(props) {
                     <div className={classes.details}>
                         <h5 className={classes.p}>key {sheetmusic.key}</h5>
                         <h5 className={classes.p}>{sheetmusic.componist}</h5>
-                        <h5 className={classes.p}>{sheetmusic.instrument}</h5>
+                        <h5 className={classes.p}>{sheetmusic.instrument_Description}</h5>
                     </div>
                     <h2>Comment</h2>
                     <TextField
