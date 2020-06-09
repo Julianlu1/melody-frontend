@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Global from "../services/Global";
+import { RESTSERVER } from "../services/Global";
 
 import SheetMusic from '../components/Sheetmusic/SheetMusic';
 import Filter from '../components/Sheetmusic/Filter';
@@ -18,7 +18,7 @@ export default class SheetMusicPage extends Component {
         super(props);
     }
     componentDidMount() {
-        fetch(`${Global.restServer}/sheetmusic`)
+        fetch(`${RESTSERVER}/sheetmusic`)
             .then(res => res.json())
             .then((data) => {
                 this.setState({ sheetmusic: data });
@@ -42,7 +42,7 @@ export default class SheetMusicPage extends Component {
 
         console.log(filterString);
 
-        fetch(`${Global.restServer}/sheetmusic/filter${filterString}`, {
+        fetch(`${RESTSERVER}/sheetmusic/filter${filterString}`, {
             method: "get",
             headers: {
                 'content-type': 'application/json'
@@ -63,6 +63,8 @@ export default class SheetMusicPage extends Component {
         //     encodeURI(this.state.sheetmusic[0].pdf) + "'></iframe>"
         // )
     }
+
+
 
     render() {
         window.sessionStorage.setItem('isHomepage', false);

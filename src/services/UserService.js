@@ -1,11 +1,11 @@
 import React from 'react';
 
 import Auth from "../Auth";
-import Global from "../services/Global";
+import { RESTSERVER } from "../services/Global";
 
 
 export async function signIn(username, password) {
-    return fetch(`${Global.restServer}/authenticate`, {
+    return fetch(`${RESTSERVER}/authenticate`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json'
@@ -20,7 +20,7 @@ export async function signIn(username, password) {
 }
 
 export async function signUp(username, password) {
-    return fetch(`${Global.restServer}/register`, {
+    return fetch(`${RESTSERVER}/register`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json'

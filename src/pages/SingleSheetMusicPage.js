@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-import Global from "../services/Global";
 import { addComment } from "../services/CommentService";
 
 import { Document, Page, pdfjs } from 'react-pdf';
@@ -16,6 +15,7 @@ import Comments from '../components/SingleSheetmusic/Comments';
 
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import { RESTSERVER } from '../services/Global';
 
 const useStyles = makeStyles(theme => ({
     title: {
@@ -75,7 +75,7 @@ function SingleSheetMusicPage(props) {
     //
 
     async function getSheetmusic() {
-        await fetch(`${Global.restServer}/sheetmusic/${props.match.params.id}`)
+        await fetch(`${RESTSERVER}/sheetmusic/${props.match.params.id}`)
             .then(res => res.json())
             .then((data) => {
                 setSheetmusic(data);
@@ -87,7 +87,7 @@ function SingleSheetMusicPage(props) {
     }
 
     function downloadSheet() {
-        window.open(`${Global.restServer}` + "/images/" + sheetmusic.pdf);
+        window.open(`${RESTSERVER}` + "/images/" + sheetmusic.pdf);
     }
 
     // De waarde van de descriptionbox setten
@@ -124,6 +124,7 @@ function SingleSheetMusicPage(props) {
     // Als sheetmusic id is veranderd wordt de functie nog een keer aangeroepen
     useEffect(() => {
         getSheetmusic();
+        console.log(`${RESTSERVER}` + "/images/" + sheetmusic.pdf);
     }, [sheetmusic.id])
 
     // Snackbar
@@ -145,7 +146,7 @@ function SingleSheetMusicPage(props) {
                 <Grid item md={4}>
                     <h1 className={classes.title}>{sheetmusic.title}</h1>
                     <Document
-                        file={"http://localhost:8090/images/" + sheetmusic.pdf}
+                        file={`${RESTSERVER}/images/${sheetmusic.pdf}`}
                         onLoadSuccess={onDocumentLoadSuccess.bind(this)}
                         onLoadError={console.error}
                     >

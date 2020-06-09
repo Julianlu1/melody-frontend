@@ -4,6 +4,7 @@
 
 .root{
     max-width: 250px;
+    max-height: 650px;
 }
 .pos{
     margin-bottom: 12px;
@@ -12,3 +13,4 @@
 .title{
     font-size: 14px;
 }
+

@@ -50,12 +50,17 @@ section{
 .btn{
   padding: 10px 25px;
   border-radius: 25px;
+  transition: 0.3s;
 }
 
 .btn-full{
-  background-color: orange;
+  background-color: #e67e22;
   color: #fff;
   font-size: 18px;
+}
+
+.btn:hover{
+  background-color: #965318;
 }
 
 /* ----- PARAGRAPH ----- */
@@ -83,7 +88,7 @@ h2{
 h2:after{
   display:block;
   height: 2px;
-  background-color: orange;
+  background-color: #e67e22;
   content: " ";
   width: 100px;
   margin: 0 auto;

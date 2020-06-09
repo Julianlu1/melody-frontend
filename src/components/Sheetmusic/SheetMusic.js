@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Document, Page, pdfjs } from 'react-pdf';
 
+import { RESTSERVER } from '../../services/Global.js';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -60,9 +61,10 @@ function SheetMusic(props) {
             <Card className={styles.root}>
                 <CardActionArea>
                     <Document
-                        file={"http://localhost:8090/images/" + props.sheet.pdf}
+                        file={`${RESTSERVER}/images/${props.sheet.pdf}`}
                         onLoadSuccess={onDocumentLoadSuccess.bind(this)}
                         onLoadError={console.error}
+
                     >
                         <Page pageNumber={pageNumber} height={300} width={250} />
                     </Document>

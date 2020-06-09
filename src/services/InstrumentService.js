@@ -1,8 +1,8 @@
 import React from 'react';
-import Global from '../services/Global';
+import { RESTSERVER } from "../services/Global";
 
-export function getInstruments() {
-    return fetch(`${Global.restServer}/instrument`, {
+export async function getInstruments() {
+    return fetch(`${RESTSERVER}/instrument`, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',

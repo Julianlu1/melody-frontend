@@ -1,9 +1,9 @@
 import React from 'react';
-import Global from "../services/Global";
+import { RESTSERVER } from "../services/Global";
 
 export async function addComment(comment, sheetmusicId) {
     // Titel en description in variabele zetten
-    return fetch(`${Global.restServer}/comments`, {
+    return fetch(`${RESTSERVER}/comments`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',

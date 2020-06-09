@@ -1,9 +1,2 @@
-class Global {
-    // const RESTSERVER = "https://api-melody.herokuapp.com/";
-
-    constructor() {
-        this.restServer = "http://localhost:8090";
-    }
-}
-
-export default new Global();
+// export const RESTSERVER = "http://localhost:8090";
+export const RESTSERVER = "https://api-melody.herokuapp.com";
